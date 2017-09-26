@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 
+const port = process.env.PORT || 3000;
 var app = express();
 
 //middleware demo
@@ -21,4 +22,4 @@ app.get('/', (request, response) => {
 });
 
 
-app.listen(3000, () => console.log("Server is running on port 3000"));
+app.listen(port, () => console.log(`Server is running on port ${port}`));
