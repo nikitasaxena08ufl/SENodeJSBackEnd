@@ -4,9 +4,6 @@ const fs = require('fs');
 const port = process.env.PORT || 3000;
 var app = express();
 
-//middleware demo
-//make a db request to check if the user is auth
-//next is to know when we are done
 app.use((req, res, next) => {
   var now = new Date().toString();
   var log = `${now}: ${req.method} ${req.url}`;
@@ -17,8 +14,18 @@ app.use((req, res, next) => {
   next();
 });
 
+var studentsFile;
+var students = [];
+
+try{
+  studentsFile = fs.readFileSync('playground/students.json');
+  students = JSON.parse(studentsFile);
+}catch(e){
+  console.log("File doesn't exist");
+}
+
 app.get('/', (request, response) => {
-  response.send("Hello nikita!");
+  response.send(students);
 });
 
 
